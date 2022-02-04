@@ -14,10 +14,10 @@ class Player(pygame.sprite.Sprite):
 		self.import_player_assets()
 		self.status = 'down'
 		self.frame_index = 0
-		self.animation_speed = 0.15
+		self.animation_speed = 0.07
 
 		self.direction = pygame.math.Vector2()
-		self.speed = 5
+		self.speed = 2
 		self.obstacle_sprites = obstacle_sprites
 
 

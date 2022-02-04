@@ -27,7 +27,7 @@ class Game:
 			self.screen.fill('black')
 			self.level.run()
 			pygame.display.update()
-			self.clock.tick(FPS)
+			self.clock.tick(120)
 			
 
 	def resize_window(self, event):

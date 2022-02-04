@@ -1,7 +1,6 @@
 import pygame 
 from settings import *
 from tile import Tile
-from grass import Grass
 from player import Player
 from npc import NPC
 from debug import debug
