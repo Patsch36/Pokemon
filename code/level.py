@@ -25,13 +25,15 @@ class Level:
 				x = col_index * TILESIZE
 				y = row_index * TILESIZE
 				if col == 'x':
-					Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
-					Grass((x,y),[self.visible_sprites], background=True)
+					# Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
+					#Grass((x,y),[self.visible_sprites], background=True)
+					pass
 				if col == 'p':
 					self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites)
-					Grass((x,y),[self.visible_sprites], background=True)
+					#Grass((x,y),[self.visible_sprites], background=True)
 				if col == ' ':
-					Grass((x,y),[self.visible_sprites])
+					#Grass((x,y),[self.visible_sprites])
+					pass
 
 		NPC((192, 64), 1, [self.visible_sprites,self.obstacle_sprites])	
 
@@ -49,6 +51,10 @@ class YSortCameraGroup(pygame.sprite.Group):
 		super().__init__()
 		self.offset = pygame.math.Vector2()
 
+		# creating the floor
+		self.floor_surf = pygame.image.load('Tiled/Route_1.png').convert()
+		self.floor_rect = self.floor_surf.get_rect(topleft = (0,0))
+
 	def custom_draw(self,player):
 		self.display_surface = pygame.display.get_surface()
 		self.half_width = self.display_surface.get_size()[0] // 2
@@ -57,6 +63,11 @@ class YSortCameraGroup(pygame.sprite.Group):
 		# getting the offset 
 		self.offset.x = player.rect.centerx - self.half_width
 		self.offset.y = player.rect.centery - self.half_height
+
+		# drawing the floor
+		floor_offset_pos = self.floor_rect.topleft - self.offset
+		self.display_surface.blit(self.floor_surf,floor_offset_pos)
+
 
 		# for sprite in self.sprites():
 		sprites = sorted(self.sprites(),key = lambda sprite: sprite.rect.centery)

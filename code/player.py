@@ -9,7 +9,7 @@ class Player(pygame.sprite.Sprite):
 		self.hitbox = self.rect.inflate(0,-26)
 
 		self.direction = pygame.math.Vector2()
-		self.speed = 5
+		self.speed = 3
 
 		# Add layer
 		self.image_layer = 1
