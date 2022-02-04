@@ -20,21 +20,17 @@ class Level:
 		self.create_map()
 
 	def create_map(self):
+		# Creating details from map
 		for row_index,row in enumerate(WORLD_MAP):
 			for col_index, col in enumerate(row):
 				x = col_index * TILESIZE
 				y = row_index * TILESIZE
 				if col == 'x':
-					# Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
-					#Grass((x,y),[self.visible_sprites], background=True)
 					pass
 				if col == 'p':
 					self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites)
-					#Grass((x,y),[self.visible_sprites], background=True)
-				if col == ' ':
-					#Grass((x,y),[self.visible_sprites])
-					pass
 
+		# Creating NPCs
 		NPC((192, 64), 1, [self.visible_sprites,self.obstacle_sprites])	
 
 
@@ -56,6 +52,7 @@ class YSortCameraGroup(pygame.sprite.Group):
 		self.floor_rect = self.floor_surf.get_rect(topleft = (0,0))
 
 	def custom_draw(self,player):
+		# Getting Data from current display (right data even after resize event)
 		self.display_surface = pygame.display.get_surface()
 		self.half_width = self.display_surface.get_size()[0] // 2
 		self.half_height = self.display_surface.get_size()[1] // 2
@@ -68,9 +65,7 @@ class YSortCameraGroup(pygame.sprite.Group):
 		floor_offset_pos = self.floor_rect.topleft - self.offset
 		self.display_surface.blit(self.floor_surf,floor_offset_pos)
 
-
 		# for sprite in self.sprites():
-		sprites = sorted(self.sprites(),key = lambda sprite: sprite.rect.centery)
-		for sprite in sorted(sprites,key = lambda sprite: sprite.image_layer):
+		for sprite in sorted(self.sprites(),key = lambda sprite: sprite.rect.centery):
 			offset_pos = sprite.rect.topleft - self.offset
 			self.display_surface.blit(sprite.image,offset_pos)

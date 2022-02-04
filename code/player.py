@@ -18,10 +18,6 @@ class Player(pygame.sprite.Sprite):
 
 		self.direction = pygame.math.Vector2()
 		self.speed = 5
-
-		# Add layer
-		self.image_layer = 1
-
 		self.obstacle_sprites = obstacle_sprites
 
 

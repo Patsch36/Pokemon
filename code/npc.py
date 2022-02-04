@@ -12,6 +12,3 @@ class NPC(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = (self.rect.inflate(-20, -10))
-        
-        # Add layer
-        self.image_layer = 1
