@@ -22,7 +22,7 @@ class Game:
 					sys.exit()
 			
 			if event.type == VIDEORESIZE:
-				resize_window(event)
+				self.resize_window(event)
 				
 			self.screen.fill('black')
 			self.level.run()
