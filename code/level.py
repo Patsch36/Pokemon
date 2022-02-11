@@ -14,6 +14,9 @@ class Level:
 		# sprite group setup
 		self.visible_sprites = YSortCameraGroup()
 		self.obstacle_sprites = pygame.sprite.Group()
+		
+		# NPC- Group
+		self.NPCs = []
 
 		# sprite setup
 		self.create_map()
@@ -30,12 +33,13 @@ class Level:
 					self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites)
 
 		# Creating NPCs
-		NPC((192, 64), 1, [self.visible_sprites,self.obstacle_sprites])	
+		self.NPCs.insert(0, NPC((192, 64), 1, [self.visible_sprites,self.obstacle_sprites]))
+		self.player.NPCs = self.NPCs
 
 
 	def run(self):
 		# update and draw the game
-		self.visible_sprites.custom_draw(self.player)
+		self.visible_sprites.custom_draw(self.player, self.NPCs)
 		self.visible_sprites.update()
 
 
@@ -50,7 +54,7 @@ class YSortCameraGroup(pygame.sprite.Group):
 		self.floor_surf = pygame.image.load('Tiled/Route_1.png').convert()
 		self.floor_rect = self.floor_surf.get_rect(topleft = (0,0))
 
-	def custom_draw(self,player):
+	def custom_draw(self, player, NPCs):
 		# Getting Data from current display (right data even after resize event)
 		self.display_surface = pygame.display.get_surface()
 		self.half_width = self.display_surface.get_size()[0] // 2
@@ -68,3 +72,7 @@ class YSortCameraGroup(pygame.sprite.Group):
 		for sprite in sorted(self.sprites(),key = lambda sprite: sprite.rect.centery):
 			offset_pos = sprite.rect.topleft - self.offset
 			self.display_surface.blit(sprite.image,offset_pos)
+
+		for npc in NPCs:      
+			npc.draw_speech_bubble(self.offset)
+

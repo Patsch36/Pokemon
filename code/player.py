@@ -1,6 +1,8 @@
 import pygame 
 from settings import *
 from support import import_folder
+from debug import debug
+from npc import *
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self,pos,groups,obstacle_sprites):
@@ -8,6 +10,14 @@ class Player(pygame.sprite.Sprite):
 		self.image = pygame.image.load('graphics/test/player.png').convert_alpha()		# Some IDEs need a ../ in path
 		self.rect = self.image.get_rect(topleft = pos)
 		self.hitbox = self.rect.inflate(0,-26)
+
+
+		# screen data
+		self.display_surface = pygame.display.get_surface()
+		self.half_width = self.display_surface.get_size()[0] // 2
+		self.half_height = self.display_surface.get_size()[1] // 2
+		self.offset = pygame.Vector2()
+
 
 
 		# graphics setup
@@ -19,6 +29,13 @@ class Player(pygame.sprite.Sprite):
 		self.direction = pygame.math.Vector2()
 		self.speed = 2
 		self.obstacle_sprites = obstacle_sprites
+
+		# list of all npcs to interact with
+		self.NPCs = []
+		self.speak = False
+
+		# flags for pressed keys
+		self.space_pressed = False
 
 
 	def import_player_assets(self):
@@ -34,23 +51,61 @@ class Player(pygame.sprite.Sprite):
 		keys = pygame.key.get_pressed()
 
 		# movement input
-		if keys[pygame.K_UP]:
-			self.direction.y = -1
-			self.status = 'up'
-		elif keys[pygame.K_DOWN]:
-			self.direction.y = 1
-			self.status = 'down'
-		else:
-			self.direction.y = 0
+		if not self.speak:
+			if keys[pygame.K_UP]:
+				self.direction.y = -1
+				self.status = 'up'
+			elif keys[pygame.K_DOWN]:
+				self.direction.y = 1
+				self.status = 'down'
+			else:
+				self.direction.y = 0
 
-		if keys[pygame.K_RIGHT]:
-			self.direction.x = 1
-			self.status = 'right'
-		elif keys[pygame.K_LEFT]:
-			self.direction.x = -1
-			self.status = 'left'
+			if keys[pygame.K_RIGHT]:
+				self.direction.x = 1
+				self.status = 'right'
+			elif keys[pygame.K_LEFT]:
+				self.direction.x = -1
+				self.status = 'left'
+			else:
+				self.direction.x = 0
+
+		if keys[pygame.K_SPACE]:
+			if self.space_pressed == False:
+				self.space_pressed = True
+				pos = self.rect.topleft
+				posx= pos[0] // TILESIZE
+				posy = pos[1]// TILESIZE
+				pos = [posx, posy]
+				debug(pos)
+				for npc in self.NPCs:
+					# print(str(pos) + ' ' + str(npc.pos))
+					# Always check 2 position: because if player stands 1px to far away from tile, it looks like he stands in front of npc but technically he's on another tile
+					if (self.status == 'up' or self.status == 'up_idle') and ((npc.pos + (0, 1)) == pos or (npc.pos + (-1, 1)) == pos):
+						debug('spoke to NPC above')
+						npc.speak()
+						self.speak = npc.interaction
+						print(self.speak)
+					# For some reason, npc is 2 tiles beneath the player when talking from above (not when talking from beneath, lol)
+					elif (self.status == 'down' or self.status == 'down_idle')  and ((npc.pos - (0, 2)) == pos or (npc.pos - (1, 2)) == pos):
+						debug('spoke to NPC underneath')
+						npc.speak()
+						self.speak = npc.interaction
+					# For some reason, npc is 2 tiles right the player when talking from left (not when talking from right, lol)
+					elif (self.status == 'right' or self.status == 'right_idle') and (npc.pos - (2, 0) == pos):
+						debug('spoke to NPC right')
+						npc.speak()
+						self.speak = npc.interaction
+						npc.draw_speech_bubble(self.offset)
+					# standing right, but looking left so left_idle (reverse thinking other than above, brainfuck and half an hour debug lol)
+					elif (self.status == 'left' or self.status == 'left_idle')  and (npc.pos + (1, 0) == pos):
+						debug('spoke to NPC left')
+						npc.speak()
+						self.speak = npc.interaction
+					break
 		else:
-			self.direction.x = 0
+			self.space_pressed = False
+
 
 	def get_status(self):
 
