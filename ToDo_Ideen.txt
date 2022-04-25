@@ -1,0 +1,9 @@
+To Do:
+- docstring (""" bla """) -> mit test: (wie könnte man testen) mit mkdocs html seite erstellen
+
+Ideen:
+- Spielfeld dynamisch erstellen 
+- wetter api nutzen um wetter einzubinden
+- 
+
+
