@@ -2,6 +2,7 @@
 Pygames Implementierg eines Open Wolrd 2D games mit automatischr Map- Generierung und Datenverwaltung/ Bearbeitung
 
 ## To Do:
+- [x] Erstellen der Game- Engine mit Move-Mechanik, Player-animationen, NPC Mechanik
 - [ ] docstring (""" bla """) -> mit test: (wie könnte man testen) mit mkdocs html seite erstellen
 - [ ] **PS** Spielfeld dynamisch erstellen 
 - [ ] wetter api nutzen um wetter einzubinden (Standord-api/ IP API benötigt)
