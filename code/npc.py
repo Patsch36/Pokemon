@@ -17,7 +17,7 @@ class NPC(pygame.sprite.Sprite):
 
         self.textcounter = 0
         self.textsnippets = 3
-        self.texts = ["Hallo Spieler", "Netter Tag um Pokemon zu fangen, oder?", "Ich wünsche dir viel Spaß dabei"]
+        self.texts = ["Hallo Spieler", "Netter Tag um Items zu sammeln, oder?", "Ich wünsche dir viel Spaß dabei"]
 
         self.pos = pygame.Vector2()
         self.pos.x = pos[0]//TILESIZE

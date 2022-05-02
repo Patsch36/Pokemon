@@ -1,5 +1,8 @@
-import pygame 
+from random import choice
+import pygame
+from pytmx.util_pygame import load_pygame
 from settings import *
+from support import *
 from tile import Tile
 from player import Player
 from npc import NPC
@@ -11,9 +14,12 @@ class Level:
 		# get the display surface 
 		self.display_surface = pygame.display.get_surface()
 
+		self.tmx_data = load_pygame('./Tiled/Maps/Route_1.tmx')
+
 		# sprite group setup
 		self.visible_sprites = YSortCameraGroup()
 		self.obstacle_sprites = pygame.sprite.Group()
+		self.sprite_group = pygame.sprite.Group()
 		
 		# NPC- Group
 		self.NPCs = []
@@ -23,14 +29,36 @@ class Level:
 
 	def create_map(self):
 		# Creating details from map
-		for row_index,row in enumerate(WORLD_MAP):
-			for col_index, col in enumerate(row):
-				x = col_index * TILESIZE
-				y = row_index * TILESIZE
-				if col == 'x':
-					pass
-				if col == 'p':
-					self.player = Player((x,y),[self.visible_sprites],self.obstacle_sprites)
+		layouts = {
+			'flowers': import_csv_layout('./map/Route_1_Flowers.csv'),
+		}
+		graphics = {
+			'flowers': import_folder('./graphics/flowers')
+		}
+
+		for style,layout in layouts.items():
+			for row_index,row in enumerate(layout):
+				for col_index, col in enumerate(row):
+					if col != '-1':
+						x = col_index * TILESIZE
+						y = row_index * TILESIZE
+						if style == 'flowers':
+							surf = graphics['flowers'][int(col) - 2]
+							Tile((x,y),[self.visible_sprites],'visible', surf)
+
+						# if style == 'object':
+						# 	surf = graphics['objects'][int(col)]
+						# 	Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf)
+
+		# Building with pytmx (buggy)
+		# for layer in self.tmx_data.visible_layers:
+		# 	if hasattr(layer, 'data'):
+		# 		for x, y, surf in layer.tiles():
+		# 			pos = (x * TILESIZE, y * TILESIZE)
+		# 			Tile(pos = pos, surf = surf, groups = self.sprite_group)
+
+		
+		self.player = Player((100,100),[self.visible_sprites],self.obstacle_sprites)
 
 		# Creating NPCs
 		self.NPCs.insert(0, NPC((192, 64), 1, [self.visible_sprites,self.obstacle_sprites]))
@@ -48,6 +76,9 @@ class YSortCameraGroup(pygame.sprite.Group):
 
 		# general setup 
 		super().__init__()
+		self.display_surface = pygame.display.get_surface()
+		self.half_width = self.display_surface.get_size()[0] // 2
+		self.half_height = self.display_surface.get_size()[1] // 2
 		self.offset = pygame.math.Vector2()
 
 		# creating the floor
@@ -56,9 +87,7 @@ class YSortCameraGroup(pygame.sprite.Group):
 
 	def custom_draw(self, player, NPCs):
 		# Getting Data from current display (right data even after resize event)
-		self.display_surface = pygame.display.get_surface()
-		self.half_width = self.display_surface.get_size()[0] // 2
-		self.half_height = self.display_surface.get_size()[1] // 2
+		
 
 		# getting the offset 
 		self.offset.x = player.rect.centerx - self.half_width

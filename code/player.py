@@ -77,29 +77,22 @@ class Player(pygame.sprite.Sprite):
 				posx= pos[0] // TILESIZE
 				posy = pos[1]// TILESIZE
 				pos = [posx, posy]
-				debug(pos)
 				for npc in self.NPCs:
-					# print(str(pos) + ' ' + str(npc.pos))
 					# Always check 2 position: because if player stands 1px to far away from tile, it looks like he stands in front of npc but technically he's on another tile
 					if (self.status == 'up' or self.status == 'up_idle') and ((npc.pos + (0, 1)) == pos or (npc.pos + (-1, 1)) == pos):
-						debug('spoke to NPC above')
 						npc.speak()
 						self.speak = npc.interaction
-						print(self.speak)
 					# For some reason, npc is 2 tiles beneath the player when talking from above (not when talking from beneath, lol)
 					elif (self.status == 'down' or self.status == 'down_idle')  and ((npc.pos - (0, 2)) == pos or (npc.pos - (1, 2)) == pos):
-						debug('spoke to NPC underneath')
 						npc.speak()
 						self.speak = npc.interaction
 					# For some reason, npc is 2 tiles right the player when talking from left (not when talking from right, lol)
 					elif (self.status == 'right' or self.status == 'right_idle') and (npc.pos - (2, 0) == pos):
-						debug('spoke to NPC right')
 						npc.speak()
 						self.speak = npc.interaction
 						npc.draw_speech_bubble(self.offset)
 					# standing right, but looking left so left_idle (reverse thinking other than above, brainfuck and half an hour debug lol)
 					elif (self.status == 'left' or self.status == 'left_idle')  and (npc.pos + (1, 0) == pos):
-						debug('spoke to NPC left')
 						npc.speak()
 						self.speak = npc.interaction
 					break
