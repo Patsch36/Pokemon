@@ -1,11 +1,14 @@
 import pygame 
 from settings import *
 import random
+from NPC_data import *
 from debug import debug
 
 class NPC(pygame.sprite.Sprite):
     def __init__(self, pos, npc_number, groups):
         super().__init__(groups)
+        
+        npc_data = NPC_data("code//Game_NPC.db")
 
         image_str = 'graphics/test/NPCs/Teenager_' + str(npc_number) + '.png'
         self.image = pygame.image.load(image_str).convert_alpha()
@@ -17,8 +20,13 @@ class NPC(pygame.sprite.Sprite):
 
         self.textcounter = 0
         self.textsnippets = 3
-        self.texts = ["Hallo Spieler", "Netter Tag um Pokemon zu fangen, oder?", "Ich wünsche dir viel Spaß dabei"]
-
+        self.texts = []
+        count = npc_data.get_dialog_length()
+        self.textsnippets = count
+        i = 1
+        while(i<=count):
+            self.texts += npc_data.get_dialog(1, i) 
+            i += 1
         self.pos = pygame.Vector2()
         self.pos.x = pos[0]//TILESIZE
         self.pos.y = pos[1]//TILESIZE
