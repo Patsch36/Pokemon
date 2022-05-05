@@ -2,6 +2,7 @@ import pygame, sys
 from pygame.locals import *		# Needed for resizable window (Especially for Constant RESIZABLE and VIDEOSIZE)
 from settings import *
 from level import Level
+from NPC_data import *
 
 class Game:
 	def __init__(self):
@@ -15,6 +16,11 @@ class Game:
 		self.level = Level()
 	
 	def run(self):
+		npc_data = NPC_data("code//Game_NPC.db")
+  		
+		data = npc_data.get_dialog(1, 1)
+		print(data)
+		
 		while True:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
