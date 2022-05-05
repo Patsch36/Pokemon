@@ -20,6 +20,7 @@ class NPC(pygame.sprite.Sprite):
 
         self.textcounter = 0
         self.textsnippets = 3
+<<<<<<< HEAD
         self.texts = []
         count = npc_data.get_dialog_length()
         self.textsnippets = count
@@ -27,6 +28,9 @@ class NPC(pygame.sprite.Sprite):
         while(i<=count):
             self.texts += npc_data.get_dialog(1, i) 
             i += 1
+=======
+        self.texts = ["Hallo Spieler", "Netter Tag um Items zu sammeln, oder?", "Ich wünsche dir viel Spaß dabei"]
+>>>>>>> 9b4598d52c5fbb7e4f9c24fe2574537cebab8aea
 
         self.pos = pygame.Vector2()
         self.pos.x = pos[0]//TILESIZE
