@@ -27,6 +27,7 @@ class NPC(pygame.sprite.Sprite):
         while(i<=count):
             self.texts += npc_data.get_dialog(1, i) 
             i += 1
+
         self.pos = pygame.Vector2()
         self.pos.x = pos[0]//TILESIZE
         self.pos.y = pos[1]//TILESIZE
