@@ -39,11 +39,13 @@ class Level:
 			'flowers': import_csv_layout('./map/Route_1_Flowers.csv'),
 			'trees': import_csv_layout('./map/Route_1_Trees.csv'),
 			'stones': import_csv_layout('./map/Route_1_Stones.csv'),
+			'decoration': import_csv_layout('./map/Route_1_Decoration.csv'),
 		}
 		graphics = {
 			'flowers': import_folder('./graphics/flowers'),
 			'trees': import_folder('./graphics/trees'),
-			'stones': import_folder('./graphics/stones')
+			'stones': import_folder('./graphics/stones'),
+			'decoration': import_folder('./graphics/decoration')
 		}
 
 		for style,layout in layouts.items():
@@ -60,6 +62,10 @@ class Level:
 							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
 						if style == 'stones':
 							surf = graphics['stones'][self.translation_table['stones'][col]]
+							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
+						if style == 'decoration':
+							# if col == 332 && season == winter, then draw snowman, otherwise skip
+							surf = graphics['decoration'][self.translation_table['decoration'][col]]
 							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
 
 		# Building with pytmx (buggy)
