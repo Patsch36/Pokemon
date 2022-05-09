@@ -1,6 +1,7 @@
 from random import choice
 import pygame
 from pytmx.util_pygame import load_pygame
+import json
 from settings import *
 from support import *
 from tile import Tile
@@ -23,9 +24,14 @@ class Level:
 		
 		# NPC- Group
 		self.NPCs = []
+		
+		# Get translation table for images (because in bigger sprite sheets, Tiled uses other names than in you in your graphics folder)
+		with open('./graphics/translationtable.json', 'r') as f:
+			self.translation_table = json.load(f)
 
 		# sprite setup
 		self.create_map()
+
 
 	def create_map(self):
 		# Creating details from map
@@ -43,7 +49,7 @@ class Level:
 						x = col_index * TILESIZE
 						y = row_index * TILESIZE
 						if style == 'flowers':
-							surf = graphics['flowers'][int(col) - 2]
+							surf = graphics['flowers'][self.translation_table['flowers'][col]]
 							Tile((x,y),[self.visible_sprites],'visible', surf)
 
 						# if style == 'object':
