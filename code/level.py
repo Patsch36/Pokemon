@@ -37,9 +37,13 @@ class Level:
 		# Creating details from map
 		layouts = {
 			'flowers': import_csv_layout('./map/Route_1_Flowers.csv'),
+			'trees': import_csv_layout('./map/Route_1_Trees.csv'),
+			'stones': import_csv_layout('./map/Route_1_Stones.csv'),
 		}
 		graphics = {
-			'flowers': import_folder('./graphics/flowers')
+			'flowers': import_folder('./graphics/flowers'),
+			'trees': import_folder('./graphics/trees'),
+			'stones': import_folder('./graphics/stones')
 		}
 
 		for style,layout in layouts.items():
@@ -51,10 +55,12 @@ class Level:
 						if style == 'flowers':
 							surf = graphics['flowers'][self.translation_table['flowers'][col]]
 							Tile((x,y),[self.visible_sprites],'visible', surf)
-
-						# if style == 'object':
-						# 	surf = graphics['objects'][int(col)]
-						# 	Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf)
+						if style == 'trees':
+							surf = graphics['trees'][self.translation_table['trees'][col]]
+							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
+						if style == 'stones':
+							surf = graphics['stones'][self.translation_table['stones'][col]]
+							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
 
 		# Building with pytmx (buggy)
 		# for layer in self.tmx_data.visible_layers:
@@ -64,7 +70,7 @@ class Level:
 		# 			Tile(pos = pos, surf = surf, groups = self.sprite_group)
 
 		
-		self.player = Player((100,100),[self.visible_sprites],self.obstacle_sprites)
+		self.player = Player((250,100),[self.visible_sprites],self.obstacle_sprites)
 
 		# Creating NPCs
 		self.NPCs.insert(0, NPC((192, 64), 1, [self.visible_sprites,self.obstacle_sprites]))
