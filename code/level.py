@@ -65,7 +65,7 @@ class Level:
 							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
 						if style == 'decoration':
 							# if col == 332 && season == winter, then draw snowman, otherwise skip
-							# If it's winter, you can add to the translated image-number + 2 if the original col was 334 or 335 (winter and summer version of image available)
+							# If it's winter, you can add to the translated image-number + 2 if the original col was 333 or 334 (winter and summer version of image available)
 							surf = graphics['decoration'][self.translation_table['decoration'][col]]
 							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
 
