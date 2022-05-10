@@ -13,6 +13,7 @@ Pygames Implementierg eines Open Wolrd 2D games mit automatischr Map- Generierun
   - [ ] **SB** Übersetzen von icht vorhandener Sprache mit DeeplIO und anschließendes eintragen in die Datenbank
   - [ ] Position von NPC einbinden
 - [x] **PS** Verschiedene CSV- Dateien fürs Levelerstellen
+- [ ] LOGGING
 
 ## Ideen:
 - [ ] Beliebte Standorte tracken, zwischenspeichern, und die zwei Häufigsten an die Deutsche Bahn senden, die dann Ticktwerbung zwischen den zwei Standorten inGame anzeigt
