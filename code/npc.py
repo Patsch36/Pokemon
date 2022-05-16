@@ -8,7 +8,9 @@ class NPC(pygame.sprite.Sprite):
     def __init__(self, pos, npc_number, groups):
         super().__init__(groups)
         
-        npc_data = NPC_data("code//Game_NPC.db")
+        language = 'english'
+        path = "code//npc_" + language + ".db"
+        npc_data = NPC_data(path)
 
         image_str = 'graphics/test/NPCs/Teenager_' + str(npc_number) + '.png'
         self.image = pygame.image.load(image_str).convert_alpha()
@@ -27,6 +29,7 @@ class NPC(pygame.sprite.Sprite):
         while(i<=count):
             self.texts += npc_data.get_dialog(1, i) 
             i += 1
+        npc_data.close()
 
         self.pos = pygame.Vector2()
         self.pos.x = pos[0]//TILESIZE
