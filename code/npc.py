@@ -3,13 +3,13 @@ from settings import *
 import random
 from NPC_data import *
 from debug import debug
-NPCID = 1
+
 
 class NPC(pygame.sprite.Sprite):
-    def __init__(self, npc_number, groups):
+    def __init__(self, NPCID, npc_number, groups):
         super().__init__(groups)
         
-        language = 'fr'
+        language = 'en'
         
         path = "code//npc_" + language + ".db"
         self.npc_data = NPC_data(path, language)

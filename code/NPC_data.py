@@ -11,7 +11,10 @@ from language import*
 
 
 class NPC_data:
-    """_summary_
+    """Interface for all datas for NPC like position dialogs and sprites storaged in database 
+    
+    Atrributes:
+        
     """
     def __init__(self, db_path, language):
         """Initial and connection to the database
