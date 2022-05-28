@@ -26,7 +26,7 @@ class NPC(pygame.sprite.Sprite):
         self.textcounter = 0
         self.textsnippets = 3
         self.texts = []
-        count = self.npc_data.get_dialog_length()
+        count = self.npc_data.get_dialog_length(NPCID)
         self.textsnippets = count
         i = 1
         while(i<=count):

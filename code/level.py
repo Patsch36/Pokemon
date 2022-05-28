@@ -7,8 +7,10 @@ from tile import Tile
 from player import Player
 from npc import NPC
 from debug import debug
+from NPC_data import NPC_data
 
 class Level:
+    
 	def __init__(self):
 
 		# get the display surface 
@@ -26,6 +28,7 @@ class Level:
 
 		# sprite setup
 		self.create_map()
+  
 
 	def create_map(self):
 		# Creating details from map
@@ -60,8 +63,9 @@ class Level:
 		
 		self.player = Player((100,100),[self.visible_sprites],self.obstacle_sprites)
 
-		# Creating NPCs
-		self.NPCs.insert(0, NPC((192, 64), 1, [self.visible_sprites,self.obstacle_sprites]))
+		# Creating NPCs TODO insert NPCs from database
+		sprites = [self.visible_sprites,self.obstacle_sprites]
+		self.NPCs.insert(0, NPC(2, 1, sprites))
 		self.player.NPCs = self.NPCs
 
 

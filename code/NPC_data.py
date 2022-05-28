@@ -14,6 +14,11 @@ class NPC_data:
     """Interface for all datas for NPC like position dialogs and sprites storaged in database 
     
     Atrributes:
+        languageflag: True if language not as DB available otherwise false
+        
+        npc_db: Cursor to DB connection
+        
+        trans: Object of Translation class
         
     """
     def __init__(self, db_path, language):
@@ -47,14 +52,14 @@ class NPC_data:
             #log database connection failed
         
     
-    def get_dialog_length(self):
+    def get_dialog_length(self, NPCID):
         """Number of dialogs of the NPC
 
         :return: Number of dialogs of the NPC or "fail" if no found
         :rtype: int
         """
         table_name = 'Dialog'
-        select_statement = f"SELECT COUNT(*) FROM {table_name};"
+        select_statement = f"SELECT COUNT(*) FROM {table_name} WHERE NPCID == {NPCID};"
         try:
             data = self.npc_db.execute(select_statement)
             count = data.fetchone()
