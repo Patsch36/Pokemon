@@ -1,17 +1,33 @@
 
 import sqlite3 as db
 
+from sqlalchemy import false, true
+from language import*
+
 
 
 class NPC_data:
 
-    def __init__(self, db_path):
+    def __init__(self, db_path, language):
         #connect to db
-        try:
-            db_connection = db.connect(db_path)
-            self.npc_db = db_connection.cursor()
-        except db.Error as db_err:
-            print(str(db_err))
+        self.languageflag = False
+        if(self.__check(language)):
+            try:
+                db_connection = db.connect(db_path)
+                self.npc_db = db_connection.cursor() 
+            except db.OperationalError as db_err:
+                print(str(db_err)) # log language not as DB
+        else:   
+            try:
+                path = "code//npc_en.db"
+                db_connection = db.connect(path)
+                self.npc_db = db_connection.cursor()
+                self.languageflag = True
+                self.trans = Language()
+                self.language_short = language
+            except db.OperationalError as db_err:
+                print(str(db_err)) # log language not as DB
+        
             #log database connection failed
         
     
@@ -35,13 +51,16 @@ class NPC_data:
         select_statement = f"SELECT DialogText FROM {table_name} WHERE NPCID == {NPC_ID} AND DialogNumber == {dialog_number};"  #SELECT DialogText FROM {table_name} WHERE NPCID == {NPC_ID} AND DialogNumber == {dialog_number};"
         try: 
             data = self.npc_db.execute(select_statement)
-            text_data = data.fetchone()
-            return text_data
+            text_data = data.fetchone()            
         except db.OperationalError as db_err:
             print(str(db_err))
+            return "Fail"
             #log database Dialog request faild
+        if(self.languageflag):
+            text_data = self.trans.translate(text_data[0], 'en', self.language_short)
+            text_data = tuple([text_data])
 
-        return "Fail"
+        return text_data
         
         
         
@@ -75,3 +94,10 @@ class NPC_data:
     
     def close(self):
         self.npc_db.close();
+        
+    def __check(self, language):
+        languages = ['en', 'de']
+        if(language in languages):
+            return True
+        else:
+            return False

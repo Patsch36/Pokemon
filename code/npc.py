@@ -8,9 +8,11 @@ class NPC(pygame.sprite.Sprite):
     def __init__(self, pos, npc_number, groups):
         super().__init__(groups)
         
-        language = 'english'
+        language = 'fr'
+        
         path = "code//npc_" + language + ".db"
-        npc_data = NPC_data(path)
+        npc_data = NPC_data(path, language)
+        
 
         image_str = 'graphics/test/NPCs/Teenager_' + str(npc_number) + '.png'
         self.image = pygame.image.load(image_str).convert_alpha()

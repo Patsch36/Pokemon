@@ -1,14 +1,16 @@
 import requests
 import json
+import geocoder
 
 # login data sbas..gmail.com, python_IN20
 
 class Weather:
     def __init__(self):
-        self.url_location = ""
+        location = geocoder.ip("me").city
         self.url_weather = "https://api.weatherapi.com/v1/current.json?key="
-        self.url_key = "9f55021b1fcc4122892123728220905 &q=Stuttgart&aqi=no"
+        self.url_key = "9f55021b1fcc4122892123728220905 &q=" + location + "&aqi=no"
         self.url = str(self.url_weather + self.url_key)
+        location = geocoder.ip("me").city
         # log print(self.url)
         
     def __weather_mapped(self, row_weather_data):
@@ -36,6 +38,6 @@ class Weather:
             # log connection error weather api
         data = file_data.json()
         weather = data['current']['condition']
-        # log weather: weather
+        # log weather: weather # (code)
         return weather['code']
     
