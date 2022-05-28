@@ -9,7 +9,10 @@ from player import Player
 from npc import NPC
 from debug import debug
 
+
 class Level:
+	"""This class represents an level of a game build by the included Game Engine
+    """
 	def __init__(self):
 
 		# get the display surface 
@@ -34,6 +37,10 @@ class Level:
 
 
 	def create_map(self):
+		"""_summary_
+			Build map from extern files
+		"""
+
 		# Creating details from map
 		layouts = {
 			'flowers': import_csv_layout('./map/Route_1_Flowers.csv'),
@@ -85,12 +92,20 @@ class Level:
 
 
 	def run(self):
+		"""_summary_
+			Updates Sprites and draw new frames for each game tick
+		"""
 		# update and draw the game
 		self.visible_sprites.custom_draw(self.player, self.NPCs)
 		self.visible_sprites.update()
 
 
 class YSortCameraGroup(pygame.sprite.Group):
+	"""_summary_
+
+	:param pygame: Model of Pygames Sprite Groupes
+	:type pygame: _pygame.sprite.Group
+	"""
 	def __init__(self):
 
 		# general setup 
