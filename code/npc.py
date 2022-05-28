@@ -3,16 +3,17 @@ from settings import *
 import random
 from NPC_data import *
 from debug import debug
+NPCID = 1
 
 class NPC(pygame.sprite.Sprite):
-    def __init__(self, pos, npc_number, groups):
+    def __init__(self, npc_number, groups):
         super().__init__(groups)
         
         language = 'fr'
         
         path = "code//npc_" + language + ".db"
-        npc_data = NPC_data(path, language)
-        
+        self.npc_data = NPC_data(path, language)
+        pos = self.npc_data.get_position(NPCID) 
 
         image_str = 'graphics/test/NPCs/Teenager_' + str(npc_number) + '.png'
         self.image = pygame.image.load(image_str).convert_alpha()
@@ -25,18 +26,18 @@ class NPC(pygame.sprite.Sprite):
         self.textcounter = 0
         self.textsnippets = 3
         self.texts = []
-        count = npc_data.get_dialog_length()
+        count = self.npc_data.get_dialog_length()
         self.textsnippets = count
         i = 1
         while(i<=count):
-            self.texts += npc_data.get_dialog(1, i) 
+            self.texts += self.npc_data.get_dialog(NPCID, i) 
             i += 1
-        npc_data.close()
-
+        
         self.pos = pygame.Vector2()
         self.pos.x = pos[0]//TILESIZE
         self.pos.y = pos[1]//TILESIZE
-        
+
+        self.npc_data.close()
         
     def draw_speech_bubble(self, offset):
 
@@ -72,3 +73,6 @@ class NPC(pygame.sprite.Sprite):
         else:
             self.interaction = False
             self.textcounter = 0
+    
+    def position(self):
+        return self.pos.x, self.pos.y

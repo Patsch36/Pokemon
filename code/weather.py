@@ -1,19 +1,35 @@
+
 import requests
 import json
 import geocoder
 
-# login data sbas..gmail.com, python_IN20
+
 
 class Weather:
+    """Class Weater gets wetter condition of your location (over ip tracker)
+    """
     def __init__(self):
-        location = geocoder.ip("me").city
-        self.url_weather = "https://api.weatherapi.com/v1/current.json?key="
-        self.url_key = "9f55021b1fcc4122892123728220905 &q=" + location + "&aqi=no"
+        """prepare url for API request and get location
+        """
+        try:
+            location = geocoder.ip("me").city
+        except TypeError as err:
+            print(err)
+            location = "Stuttgart" # log Stuttgart as deafault cause of no connection
+        self.url_weather = "https://api.weatherapi.com/v1/current.json?key="    # login data sbas..gmail.com, python_IN20
+        self.url_key = "9f55021b1fcc4122892123728220905 &q=" + location + "&aqi=no" # key hidding was skipped cause of time
         self.url = str(self.url_weather + self.url_key)
-        location = geocoder.ip("me").city
+
         # log print(self.url)
         
     def __weather_mapped(self, row_weather_data):
+        """_summary_
+
+        :param row_weather_data: _description_
+        :type row_weather_data: _type_
+        :return: _description_
+        :rtype: _type_
+        """
         data = {'Partly cloudy': 'cloud', 'Rainy': 'rain', 'Sunny':'sun', 'Snowing': 'snow'}
         return data[row_weather_data]
         

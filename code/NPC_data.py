@@ -1,4 +1,8 @@
+"""_summary_
 
+Returns:
+    _type_: _description_
+"""
 import sqlite3 as db
 
 from sqlalchemy import false, true
@@ -7,8 +11,17 @@ from language import*
 
 
 class NPC_data:
-
+    """_summary_
+    """
     def __init__(self, db_path, language):
+        """Initial and connection to the database
+
+
+        :param db_path: path to the database
+        :type db_path: string
+        :param language: language of the dialog in the database
+        :type language: string
+        """
         #connect to db
         self.languageflag = False
         if(self.__check(language)):
@@ -32,6 +45,11 @@ class NPC_data:
         
     
     def get_dialog_length(self):
+        """Number of dialogs of the NPC
+
+        :return: Number of dialogs of the NPC or "fail" if no found
+        :rtype: int
+        """
         table_name = 'Dialog'
         select_statement = f"SELECT COUNT(*) FROM {table_name};"
         try:
@@ -47,6 +65,16 @@ class NPC_data:
     
     
     def get_dialog(self, NPC_ID, dialog_number):
+        """Dialogs of NPC
+
+        :param NPC_ID: ID of the NPC
+        :type NPC_ID: int
+        :param dialog_number: Number of the dialog from the NPC
+        :type dialog_number: int
+        :return: Dialog of the NPC
+        :rtype: tuple
+        """
+        
         table_name = 'Dialog'
         select_statement = f"SELECT DialogText FROM {table_name} WHERE NPCID == {NPC_ID} AND DialogNumber == {dialog_number};"  #SELECT DialogText FROM {table_name} WHERE NPCID == {NPC_ID} AND DialogNumber == {dialog_number};"
         try: 
@@ -65,24 +93,27 @@ class NPC_data:
         
         
     def get_position(self, NPC_ID):
+        """position of the NPC from the NPC ID
+
+        :param NPC_ID: ID of the NPC
+        :type NPC_ID: int
+        :return: position of the NPC
+        :rtype: tuple
+        """
         table_name = 'NPC'
         select_statement = f"SELECT PositionX, PositionY FROM {table_name} WHERE NPCID == {NPC_ID};"
         try:
             data = self.npc_db.execute(select_statement)
-            count = data.fetchall()
-            position_data = tuple(count[0], count[1])
-            return position_data
+            count = data.fetchone()
+            # position_data = tuple(count[0], count[1])
+            return count
         except db.OperationalError as db_err:
             print(str(db_err))
             #log database NPC Position request faild
 
         
         return "Fail"
-    
-    
-    def load_data(self, path):
-        return
-    
+        
     
     def __insert_NPC(self, NPC_ID, sprite_link, position_x, position_y):
         table_name = "NPC"
@@ -93,9 +124,18 @@ class NPC_data:
         return 
     
     def close(self):
+        """close the database connection
+        """
         self.npc_db.close();
         
     def __check(self, language):
+        """check if language is available as database
+
+        :param language: actuall language
+        :type language: string
+        :return: true if language is available as database
+        :rtype: bool
+        """
         languages = ['en', 'de']
         if(language in languages):
             return True
