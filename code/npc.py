@@ -9,7 +9,7 @@ class NPC(pygame.sprite.Sprite):
     def __init__(self, NPCID, npc_number, groups):
         super().__init__(groups)
         
-        language = 'es'
+        language = 'en'
         
         path = "code//npc_data.db"
         self.npc_data = NPC_data(path, language)
@@ -29,10 +29,9 @@ class NPC(pygame.sprite.Sprite):
         count = self.npc_data.get_dialog_length(NPCID)
         self.textsnippets = count
         i = 1
-        while(i<=count):
-            self.texts += self.npc_data.get_dialog(NPCID, i) 
-            i += 1
-        
+        for i in range(count):
+            self.texts += self.npc_data.get_dialog(NPCID, (i+1)) 
+
         self.pos = pygame.Vector2()
         self.pos.x = pos[0]//TILESIZE
         self.pos.y = pos[1]//TILESIZE

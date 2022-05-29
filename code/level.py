@@ -63,9 +63,11 @@ class Level:
 		
 		self.player = Player((100,100),[self.visible_sprites],self.obstacle_sprites)
 
-		# Creating NPCs TODO insert NPCs from database
+		# Creating NPCs TODO for loop insert NPCs from database
+		NPC_number = 2
 		sprites = [self.visible_sprites,self.obstacle_sprites]
-		self.NPCs.insert(0, NPC(2, 1, sprites))
+		for i in range(NPC_number):
+			self.NPCs.insert(i, NPC((i+1), 1, sprites))
 		self.player.NPCs = self.NPCs
 
 
