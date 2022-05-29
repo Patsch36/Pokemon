@@ -31,24 +31,19 @@ class NPC_data:
         :type language: string
         """
         #connect to db
+        self.language = language
+        try:
+            db_connection = db.connect(db_path)
+            self.npc_db = db_connection.cursor()  
+        except db.OperationalError as db_err:
+            print(str(db_err)) # log language not as DB
+            
         self.languageflag = False
-        if(self.__check(language)):
-            try:
-                db_connection = db.connect(db_path)
-                self.npc_db = db_connection.cursor() 
-            except db.OperationalError as db_err:
-                print(str(db_err)) # log language not as DB
-        else:   
-            try:
-                path = "code//npc_en.db"
-                db_connection = db.connect(path)
-                self.npc_db = db_connection.cursor()
-                self.languageflag = True
-                self.trans = Language()
-                self.language_short = language
-            except db.OperationalError as db_err:
-                print(str(db_err)) # log language not as DB
-        
+        if not self.__check(language): 
+            self.trans = Language()
+            self.languageflag = True
+            self.language = 'en'
+            self.language_short = language
             #log database connection failed
         
     
@@ -58,7 +53,7 @@ class NPC_data:
         :return: Number of dialogs of the NPC or "fail" if no found
         :rtype: int
         """
-        table_name = 'Dialog'
+        table_name = 'Dialog_' + self.language
         select_statement = f"SELECT COUNT(*) FROM {table_name} WHERE NPCID == {NPCID};"
         try:
             data = self.npc_db.execute(select_statement)
@@ -69,7 +64,7 @@ class NPC_data:
             print(str(db_err))
             #log database Dialog length request faild
 
-        return "Fail"
+        return 0
     
     
     def get_dialog(self, NPC_ID, dialog_number):
@@ -83,7 +78,7 @@ class NPC_data:
         :rtype: tuple
         """
         
-        table_name = 'Dialog'
+        table_name = 'Dialog_' + self.language
         select_statement = f"SELECT DialogText FROM {table_name} WHERE NPCID == {NPC_ID} AND DialogNumber == {dialog_number};"  #SELECT DialogText FROM {table_name} WHERE NPCID == {NPC_ID} AND DialogNumber == {dialog_number};"
         try: 
             data = self.npc_db.execute(select_statement)

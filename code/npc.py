@@ -9,9 +9,9 @@ class NPC(pygame.sprite.Sprite):
     def __init__(self, NPCID, npc_number, groups):
         super().__init__(groups)
         
-        language = 'en'
+        language = 'es'
         
-        path = "code//npc_" + language + ".db"
+        path = "code//npc_data.db"
         self.npc_data = NPC_data(path, language)
         pos = self.npc_data.get_position(NPCID) 
 
