@@ -37,8 +37,7 @@ class Level:
 
 
 	def create_map(self):
-		"""_summary_
-			Build map from extern files
+		"""Build map from extern files through reading the csv- files and building up the graphic tiles.
 		"""
 
 		# Creating details from map
@@ -92,8 +91,7 @@ class Level:
 
 
 	def run(self):
-		"""_summary_
-			Updates Sprites and draw new frames for each game tick
+		"""Updates Sprites and draw new frames for each game tick
 		"""
 		# update and draw the game
 		self.visible_sprites.custom_draw(self.player, self.NPCs)
@@ -101,7 +99,7 @@ class Level:
 
 
 class YSortCameraGroup(pygame.sprite.Group):
-	"""_summary_
+	"""New Camera Rendering
 
 	:param pygame: Model of Pygames Sprite Groupes
 	:type pygame: _pygame.sprite.Group
@@ -120,7 +118,13 @@ class YSortCameraGroup(pygame.sprite.Group):
 		self.floor_rect = self.floor_surf.get_rect(topleft = (0,0))
 
 	def custom_draw(self, player, NPCs):
-		# Getting Data from current display (right data even after resize event)
+		"""Custom draw method for noting Y- Positions for realitic 3D Graphic.
+
+		:param player: Player of the Game
+		:type player: class:`player`
+		:param NPCs: List of all NPCS
+		:type NPCs: class:`pygame.sprite.Group()`
+		"""
 		
 
 		# getting the offset 

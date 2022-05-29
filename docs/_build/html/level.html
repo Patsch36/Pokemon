@@ -87,15 +87,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="level.Level.create_map">
 <span class="sig-name descname"><span class="pre">create_map</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#level.Level.create_map" title="Permalink to this definition"></a></dt>
-<dd><p>_summary_
-Build map from extern files</p>
+<dd><p>Build map from extern files through reading the csv- files and building up the graphic tiles.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="level.Level.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#level.Level.run" title="Permalink to this definition"></a></dt>
-<dd><p>_summary_
-Updates Sprites and draw new frames for each game tick</p>
+<dd><p>Updates Sprites and draw new frames for each game tick</p>
 </dd></dl>
 
 </dd></dl>
@@ -104,7 +102,7 @@ Updates Sprites and draw new frames for each game tick</p>
 <dt class="sig sig-object py" id="level.YSortCameraGroup">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">level.</span></span><span class="sig-name descname"><span class="pre">YSortCameraGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#level.YSortCameraGroup" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pygame.sprite.Group</span></code></p>
-<p>_summary_</p>
+<p>New Camera Rendering</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>pygame</strong> (<em>_pygame.sprite.Group</em>) – Model of Pygames Sprite Groupes</p>
@@ -113,7 +111,16 @@ Updates Sprites and draw new frames for each game tick</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="level.YSortCameraGroup.custom_draw">
 <span class="sig-name descname"><span class="pre">custom_draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NPCs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#level.YSortCameraGroup.custom_draw" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Custom draw method for noting Y- Positions for realitic 3D Graphic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>player</strong> (class:<cite>player</cite>) – Player of the Game</p></li>
+<li><p><strong>NPCs</strong> (class:<cite>pygame.sprite.Group()</cite>) – List of all NPCS</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
