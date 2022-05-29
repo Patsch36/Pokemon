@@ -1,6 +1,13 @@
 from csv import reader
 from os import walk
 import pygame
+import logging
+
+def initLogger():
+	logging.basicConfig(filename='example.log', level=logging.INFO)
+
+def getLogger():
+	logger = logging.getLogger(__name__)
 
 def import_csv_layout(path):
 	terrain_map = []

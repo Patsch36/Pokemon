@@ -8,6 +8,7 @@ from tile import Tile
 from player import Player
 from npc import NPC
 from debug import debug
+import logging
 
 
 class Level:
@@ -83,11 +84,15 @@ class Level:
 		# 			Tile(pos = pos, surf = surf, groups = self.sprite_group)
 
 		
+		logging.info("Created Map")
+
 		self.player = Player((250,100),[self.visible_sprites],self.obstacle_sprites)
 
 		# Creating NPCs
 		self.NPCs.insert(0, NPC((192, 64), 1, [self.visible_sprites,self.obstacle_sprites]))
 		self.player.NPCs = self.NPCs
+
+		logging.info('Created Player and NPCs')
 
 
 	def run(self):
