@@ -95,7 +95,6 @@ class Player(pygame.sprite.Sprite):
 					elif (self.status == 'left' or self.status == 'left_idle')  and (npc.pos + (1, 0) == pos):
 						npc.speak()
 						self.speak = npc.interaction
-					break
 		else:
 			self.space_pressed = False
 
