@@ -1,6 +1,7 @@
 from random import choice
 import pygame
 from pytmx.util_pygame import load_pygame
+import json
 from settings import *
 from support import *
 from tile import Tile
@@ -8,9 +9,12 @@ from player import Player
 from npc import NPC
 from debug import debug
 from NPC_data import NPC_data
+import logging
+
 
 class Level:
-    
+	"""This class represents an level of a game build by the included Game Engine
+    """
 	def __init__(self):
 
 		# get the display surface 
@@ -25,18 +29,32 @@ class Level:
 		
 		# NPC- Group
 		self.NPCs = []
+		
+		# Get translation table for images (because in bigger sprite sheets, Tiled uses other names than in you in your graphics folder)
+		with open('./graphics/translationtable.json', 'r') as f:
+			self.translation_table = json.load(f)
 
 		# sprite setup
 		self.create_map()
   
 
+
 	def create_map(self):
+		"""Build map from extern files through reading the csv- files and building up the graphic tiles.
+		"""
+
 		# Creating details from map
 		layouts = {
 			'flowers': import_csv_layout('./map/Route_1_Flowers.csv'),
+			'trees': import_csv_layout('./map/Route_1_Trees.csv'),
+			'stones': import_csv_layout('./map/Route_1_Stones.csv'),
+			'decoration': import_csv_layout('./map/Route_1_Decoration.csv'),
 		}
 		graphics = {
-			'flowers': import_folder('./graphics/flowers')
+			'flowers': import_folder('./graphics/flowers'),
+			'trees': import_folder('./graphics/trees'),
+			'stones': import_folder('./graphics/stones'),
+			'decoration': import_folder('./graphics/decoration')
 		}
 
 		for style,layout in layouts.items():
@@ -46,12 +64,19 @@ class Level:
 						x = col_index * TILESIZE
 						y = row_index * TILESIZE
 						if style == 'flowers':
-							surf = graphics['flowers'][int(col) - 2]
+							surf = graphics['flowers'][self.translation_table['flowers'][col]]
 							Tile((x,y),[self.visible_sprites],'visible', surf)
-
-						# if style == 'object':
-						# 	surf = graphics['objects'][int(col)]
-						# 	Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf)
+						if style == 'trees':
+							surf = graphics['trees'][self.translation_table['trees'][col]]
+							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
+						if style == 'stones':
+							surf = graphics['stones'][self.translation_table['stones'][col]]
+							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
+						if style == 'decoration':
+							# if col == 332 && season == winter, then draw snowman, otherwise skip
+							# If it's winter, you can add to the translated image-number + 2 if the original col was 333 or 334 (winter and summer version of image available)
+							surf = graphics['decoration'][self.translation_table['decoration'][col]]
+							Tile((x,y + TILESIZE),[self.visible_sprites,self.obstacle_sprites],'object',surf)
 
 		# Building with pytmx (buggy)
 		# for layer in self.tmx_data.visible_layers:
@@ -61,7 +86,9 @@ class Level:
 		# 			Tile(pos = pos, surf = surf, groups = self.sprite_group)
 
 		
-		self.player = Player((100,100),[self.visible_sprites],self.obstacle_sprites)
+		logging.info("Created Map")
+
+		self.player = Player((250,100),[self.visible_sprites],self.obstacle_sprites)
 
 		# Creating NPCs TODO for loop insert NPCs from database
 		NPC_number = 4
@@ -70,14 +97,23 @@ class Level:
 			self.NPCs.insert(i, NPC((i+1), 1, sprites))
 		self.player.NPCs = self.NPCs
 
+		logging.info('Created Player and NPCs')
+
 
 	def run(self):
+		"""Updates Sprites and draw new frames for each game tick
+		"""
 		# update and draw the game
 		self.visible_sprites.custom_draw(self.player, self.NPCs)
 		self.visible_sprites.update()
 
 
 class YSortCameraGroup(pygame.sprite.Group):
+	"""New Camera Rendering
+
+	:param pygame: Model of Pygames Sprite Groupes
+	:type pygame: _pygame.sprite.Group
+	"""
 	def __init__(self):
 
 		# general setup 
@@ -92,7 +128,13 @@ class YSortCameraGroup(pygame.sprite.Group):
 		self.floor_rect = self.floor_surf.get_rect(topleft = (0,0))
 
 	def custom_draw(self, player, NPCs):
-		# Getting Data from current display (right data even after resize event)
+		"""Custom draw method for noting Y- Positions for realitic 3D Graphic.
+
+		:param player: Player of the Game
+		:type player: class:`player`
+		:param NPCs: List of all NPCS
+		:type NPCs: class:`pygame.sprite.Group()`
+		"""
 		
 
 		# getting the offset 

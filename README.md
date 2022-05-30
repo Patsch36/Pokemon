@@ -4,14 +4,16 @@ Pygames Implementierg eines Open Wolrd 2D games mit automatischr Map- Generierun
 ## To Do:
 - [x] Erstellen der Game- Engine mit Move-Mechanik, Player-animationen, NPC Mechanik
 - [ ] docstring (""" bla """) -> mit test: (wie könnte man testen) mit mkdocs html seite erstellen
-- [ ] **PS** Spielfeld dynamisch erstellen 
+- [x] **PS** Spielfeld dynamisch erstellen 
 - [ ] wetter api nutzen um wetter einzubinden (Standord-api/ IP API benötigt)
 - [ ] Grafik von Uhrzeit abhängig machen
-- [ ] **PS** Blockaden einfügen
+- [x] **PS** Blockaden einfügen
 - [ ] **SB** SQL Datenbank aufsetzen und einbinden
-  - [ ] **SB** Konzept für keys abhängig von der Sprache
+  - [x] **SB** Konzept für keys abhängig von der Sprache
   - [ ] **SB** Übersetzen von icht vorhandener Sprache mit DeeplIO und anschließendes eintragen in die Datenbank
-- [ ] **PS** Verschiedene CSV- Dateien fürs Levelerstellen
+  - [ ] Position von NPC einbinden
+- [x] **PS** Verschiedene CSV- Dateien fürs Levelerstellen
+- [ ] LOGGING
 
 ## Ideen:
 - [ ] Beliebte Standorte tracken, zwischenspeichern, und die zwei Häufigsten an die Deutsche Bahn senden, die dann Ticktwerbung zwischen den zwei Standorten inGame anzeigt
