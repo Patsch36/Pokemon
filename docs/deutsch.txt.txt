@@ -1,0 +1,17 @@
+INTRO
+
+Dieses Projekt ist im Zuge des Wahlfach- Kurses Python an der DHBW im dritten Semester entstanden.
+
+Zum Thema "Data is the new oil" wurde eine Game Engine im Stil von Pokemon Feuerrot entwickelt, die das Spielfeld dynamisch aufbaut und aufgrund von Echtzeitwetterdaten 
+das Spielerlebnis anpasst. Zusätzlich sind alle NPC Dialoge in verschiedenen Sprachen in einer Datenbank hinterlegt, die konfiguriert abgerufen werden.
+
+
+Ziel des Projektes war, den Ansatz für eine wiederverwendbare  Game engine zu liefern, die leicht um weitere Funktionen erweitert werden kann. 
+
+Dazu soll der Entwickler in der Lage sein, schnell neue Features einzubauen und Grafiken anzupassen. Zudem sollten Maps einfach austauschbar sein, um später weitere 
+Maps hinzuzufügen, um vielleicht auch das dynamische Wechseln zu ermöglichen.
+
+
+Aktuell kann nur eine Map erstellt werden. In einem weiteren Sprint kann noch hinzugefügt werden, dass der Spieler in der Lage ist, von einer Map auf die nächste zu laufen, wenn er bestimmte Stellen überschreitet. Zudem kann dem Spieler noch ein Inventar oder bessondere Fähigkeiten, die er während dem Spiel freischaltet, zugefügt werden.
+
+Es sind noch lang nicht alle Daten hinzugefügt, die möglich sind, aber dieses Projekt soll einen guten Ansatz für weitere Entwicklungen zeigen.

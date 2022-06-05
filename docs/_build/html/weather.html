@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>weather module &mdash; Game Engine 5. Juni 2022 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NPC_data module" href="NPC_data.html" />
+    <link rel="prev" title="language module" href="language.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Game Engine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todos.html">ToDos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="debug.html">debug module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="level.html">level module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="npc.html">npc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="player.html">player module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support.html">support module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tile.html">tile module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Rain.html">Rain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="game_stats.html">game_stats module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language.html">language module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">weather module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NPC_data.html">NPC_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="game_data.html">game_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="game_data_visualize.html">game_data_visualize module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">Tests</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Game Engine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">Code</a> &raquo;</li>
+      <li>weather module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/weather.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-weather">
+<span id="weather-module"></span><h1>weather module<a class="headerlink" href="#module-weather" title="Permalink to this headline"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">author</dt>
+<dd class="field-odd"><p>Sascha Bäuerle</p>
+</dd>
+<dt class="field-even">name</dt>
+<dd class="field-even"><p>language.py</p>
+</dd>
+<dt class="field-odd">created</dt>
+<dd class="field-odd"><ol class="arabic simple" start="16">
+<li><p>Mai 2022</p></li>
+</ol>
+</dd>
+<dt class="field-even">description</dt>
+<dd class="field-even"><p>Contains class Weather</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="weather.Weather">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weather.</span></span><span class="sig-name descname"><span class="pre">Weather</span></span><a class="headerlink" href="#weather.Weather" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class Weater gets wetter condition of your location (over ip tracker)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="weather.Weather.url_weather">
+<span class="sig-name descname"><span class="pre">url_weather</span></span><a class="headerlink" href="#weather.Weather.url_weather" title="Permalink to this definition"></a></dt>
+<dd><p>String   :   Url of the API</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="weather.Weather.url_key">
+<span class="sig-name descname"><span class="pre">url_key</span></span><a class="headerlink" href="#weather.Weather.url_key" title="Permalink to this definition"></a></dt>
+<dd><p>String   :   API Auth token and location</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="weather.Weather.url">
+<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#weather.Weather.url" title="Permalink to this definition"></a></dt>
+<dd><p>String   :   Concatenated String of url_weather + url_key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="weather.Weather.__weather_mapped">
+<span class="sig-name descname"><span class="pre">__weather_mapped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_weather_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weather.Weather.__weather_mapped" title="Permalink to this definition"></a></dt>
+<dd><p>Mapps the entrance string to workable strings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>row_weather_data</strong> (<em>String</em>) – Data from the weather api</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the mapped string</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="weather.Weather.getSnow">
+<span class="sig-name descname"><span class="pre">getSnow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weather.Weather.getSnow" title="Permalink to this definition"></a></dt>
+<dd><p>Query if it snowing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if it snowing, False if no</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="weather.Weather.get_weather_code">
+<span class="sig-name descname"><span class="pre">get_weather_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weather.Weather.get_weather_code" title="Permalink to this definition"></a></dt>
+<dd><p>Query for the actuall weather code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Weather code</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="weather.Weather.get_weather_text">
+<span class="sig-name descname"><span class="pre">get_weather_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weather.Weather.get_weather_text" title="Permalink to this definition"></a></dt>
+<dd><p>Query for the actuall weather text(unmapped)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Weather condition as text</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="language.html" class="btn btn-neutral float-left" title="language module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="NPC_data.html" class="btn btn-neutral float-right" title="NPC_data module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Patrick Scheich, Sascha Bäuerle.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
