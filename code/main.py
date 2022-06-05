@@ -32,12 +32,13 @@ class Game:
     """
 
     def __init__(self):
-        with open('./code/game.log', 'r+') as f:
+        with open('./code/game.log', 'x') as f:
             f.truncate(0)
         # logging.basicConfig(filename='./code/game.log', level=logging.DEBUG,
         #                     format='%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s', datefmt='%d-%m-%Y:%H:%M:%S')
             logging.basicConfig(filename='./code/game.log', level=logging.INFO,
-                             format='%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s', datefmt='%d-%m-%Y:%H:%M:%S')
+                            format='%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s', datefmt='%d-%m-%Y:%H:%M:%S')
+        
 
 
         # test_modules_installed(modules_to_install)
