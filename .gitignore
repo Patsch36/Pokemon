@@ -1,0 +1,4 @@
+*.log
+code/*.log
+*.pyc
+code/*.pyc

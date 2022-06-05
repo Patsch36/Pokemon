@@ -23,7 +23,6 @@ Test if connections, commits, etc. all works
 Test connection and what happen if connection not able
 Test what happen if the Tabel NPC is empty
 
-
 Test Case: :meth:`language.Language.translate`
 **********************************************
 Check connection and translation for alphalexically correctness.
@@ -43,3 +42,8 @@ test if playable with many NPCs
 Test Case: :meth:`NPC_data.get_dialog_length`
 *********************************************
 Test if the number change right when the database change the number of Dialog entries for one NPC (NPC ID)
+
+Test Case: :meth:`Level.creat_map`
+**********************************
+Test how much NPC and stuff can be insertet in the map up to the player getting slower and bugging
+Test with every rund one more NPC 
