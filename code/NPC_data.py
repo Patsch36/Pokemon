@@ -5,7 +5,9 @@
 :description: Contains class NPC_data 
 """
 import sqlite3 as db
+import logging
 from language import*
+
 
 
 
@@ -30,7 +32,8 @@ class NPC_data:
             db_connection = db.connect(db_path)
             self.npc_db = db_connection.cursor()  
         except db.OperationalError as db_err:
-            print(str(db_err)) # log language not as DB
+            print(str(db_err)) 
+            logging.error("NPC Database connection failed")
             
         self.languageflag = False
         if not self.__check(language): 
@@ -38,7 +41,7 @@ class NPC_data:
             self.languageflag = True
             self.language = 'en'
             self.language_short = language
-            #log database connection failed
+            
         
     
     def get_dialog_length(self, NPCID):
@@ -56,7 +59,7 @@ class NPC_data:
             return count   
         except db.OperationalError as db_err:
             print(str(db_err))
-            #log database Dialog length request faild
+            logging.error("database Dialog length request faild " + db_err)
 
         return 0
     
@@ -79,8 +82,8 @@ class NPC_data:
             text_data = data.fetchone()            
         except db.OperationalError as db_err:
             print(str(db_err))
-            return "Fail"
-            #log database Dialog request faild
+            logging.error("database Dialog request faild" + db_err)
+            
         if(self.languageflag):
             text_data = self.trans.translate(text_data[0], 'en', self.language_short)
             text_data = tuple([text_data])
@@ -101,12 +104,11 @@ class NPC_data:
         select_statement = f"SELECT PositionX, PositionY FROM {table_name} WHERE NPCID == {NPC_ID};"
         try:
             data = self.npc_db.execute(select_statement)
-            count = data.fetchone()
-            # position_data = tuple(count[0], count[1])
-            return count
+            position = data.fetchone()
+            return position
         except db.OperationalError as db_err:
             print(str(db_err))
-            #log database NPC Position request faild
+            logging.error("database NPC Position request faild")
 
         
         return "Fail"

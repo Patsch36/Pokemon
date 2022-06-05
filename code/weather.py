@@ -4,9 +4,7 @@
 :created: 16. Mai 2022
 :description: Contains class Weather 
 """
-import sys
 import requests
-import json
 import geocoder
 from datetime import date
 import logging
@@ -29,14 +27,14 @@ class Weather:
             logging.debug("Location: " + str(location))
         except TypeError as err:
             print(err)
-            location = "Stuttgart" # log Stuttgart as deafault cause of no connection
-            sys.exit()
+            location = "Stuttgart" 
+            logging.error("Stuttgart as deafault cause of no connection")# log Stuttgart as deafault cause of no connection
+            
         self.url_weather = "https://api.weatherapi.com/v1/current.json?key="    # login data sbas..gmail.com, python_IN20
         self.url_key = "9f55021b1fcc4122892123728220905&q=" + location + "&aqi=no" # key hidding was skipped cause of time
         self.url = str(self.url_weather + self.url_key)
         self.weather_text = False
 
-        # log print(self.url)
         
     def __weather_mapped(self, row_weather_data):
         """Mapps the entrance string to workable strings
@@ -74,7 +72,8 @@ class Weather:
             file_data  = requests.get(self.url)
         except requests.ConnectionError as err:
             print(err)
-            # log connection error weather api
+            logging.error("connection error weather api")
+
         data = file_data.json()
         weather = data['current']['condition']
         weather = str(weather['text'])
@@ -92,7 +91,8 @@ class Weather:
             file_data  = requests.get(self.url)
         except requests.ConnectionError as err:
             print(err)
-            # log connection error weather api
+            logging.error("connection error weather api")
+
         data = file_data.json()
         weather = data['current']['condition']
         # log weather: weather # (code)
