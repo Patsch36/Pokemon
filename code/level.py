@@ -125,11 +125,11 @@ class Level:
 						if style == 'decoration':
 							drawTile = True
 							# if col == 332 && season == winter, then draw snowman, otherwise skip
-							if not(col == 332 and self.is_snowy):
+							if col == '332' and not(self.is_snowy):
 								drawTile = False
 							# If it's winter, you can add to the translated image-number + 2 if the original col was 333 or 334 (winter and summer version of image available)
 							adder = 0
-							if (col == 333 and self.weatherapp.getSnow) or (col == 334 and self.weatherapp.getSnow):
+							if (col == '333' and self.weatherapp.getSnow) or (col == '334' and self.weatherapp.getSnow):
 									adder =  2
 
 							if drawTile:
