@@ -1,0 +1,26 @@
+05-06-2022:12:57:48 DEBUG    [game_stats.py:26] Game Data: {'current_level': 'MainLevel', 'player_position': {'player_position_x': 61.34375, 'player_position_y': 33.53125}, 'game_analytics': {'played_time': 320, 'spoken_npcs': 20}}
+05-06-2022:12:57:48 DEBUG    [connectionpool.py:231] Starting new HTTP connection (1): ipinfo.io:80
+05-06-2022:12:57:48 DEBUG    [connectionpool.py:461] http://ipinfo.io:80 "GET /json HTTP/1.1" 200 None
+05-06-2022:12:57:48 INFO     [base.py:494] Requested http://ipinfo.io/json
+05-06-2022:12:57:48 DEBUG    [weather.py:24] Location: Backnang
+05-06-2022:12:57:48 DEBUG    [connectionpool.py:975] Starting new HTTPS connection (1): api.weatherapi.com:443
+05-06-2022:12:57:48 DEBUG    [connectionpool.py:461] https://api.weatherapi.com:443 "GET /v1/current.json?key=9f55021b1fcc4122892123728220905&q=Backnang&aqi=no HTTP/1.1" 200 None
+05-06-2022:12:57:48 DEBUG    [connectionpool.py:975] Starting new HTTPS connection (1): api.weatherapi.com:443
+05-06-2022:12:57:48 DEBUG    [connectionpool.py:461] https://api.weatherapi.com:443 "GET /v1/current.json?key=9f55021b1fcc4122892123728220905&q=Backnang&aqi=no HTTP/1.1" 200 None
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [Rain.py:25] Created Rain
+05-06-2022:12:57:48 DEBUG    [level.py:83] Weather Code:1087
+05-06-2022:12:57:48 DEBUG    [level.py:84] Is snowy:False
+05-06-2022:12:57:48 INFO     [level.py:148] Created Map
+05-06-2022:12:57:48 INFO     [level.py:159] Created Player and NPCs
+05-06-2022:12:57:48 DEBUG    [main.py:51] Player status: (61.34375, 33.53125)
+05-06-2022:12:57:48 INFO     [main.py:53] Initialized Game
+05-06-2022:12:57:49 DEBUG    [game_stats.py:53] Game Time: 0:00:01
